@@ -59,7 +59,11 @@ table {
   box-sizing: border-box;
 }
 body {
+  font-height: 300;
   font-family: 'Red Hat Mono', monospace;
+  color: ${(props) => props.theme.white.darker};
+  line-height: 1.2;
+  background-color: black
 }
 a {
   text-decoration: none;
