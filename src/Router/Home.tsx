@@ -8,11 +8,13 @@ import {
   getNowPlayingMovies,
   getTopRatedMovies,
   getUpcomingMovies,
+  IData,
   IGetDataResult,
 } from "../api";
 import { category, makeImagePath } from "../utils";
 import Slider from "../Components/Slider";
 import Detail from "../Components/Detail";
+import { Helmet } from "react-helmet";
 
 const Wrapper = styled.div`
   background-color: black;
@@ -50,6 +52,7 @@ const Overview = styled.p`
 const SliderWrapper = styled.div`
   width: 100%;
   height: 300px;
+  margin-bottom: 20px;
 `;
 
 const SliderTitle = styled.h2`
@@ -57,6 +60,7 @@ const SliderTitle = styled.h2`
   color: ${(props) => props.theme.white.lighter};
   position: relative;
   padding: 20px;
+  margin-bottom: 10px;
 `;
 
 function Home() {
@@ -99,52 +103,56 @@ function Home() {
     : [];
 
   return (
-    <Wrapper>
-      {nowPlayingLoading ? (
-        <Loader>Loading...</Loader>
-      ) : (
-        <>
-          <Banner
-            bgphoto={makeImagePath(nowPlayingMovies[0].backdrop_path || "")}
-          >
-            <Title>{nowPlayingMovies[0].title}</Title>
-            <Overview>{nowPlayingMovies[0].overview}</Overview>
-          </Banner>
-          <SliderWrapper>
-            <SliderTitle>Now Playing</SliderTitle>
-            <Slider
-              data={nowPlayingMovies}
-              kind={"movie"}
-              category={category.movie_nowPlaying}
-            />
-          </SliderWrapper>
-          <SliderWrapper>
-            <SliderTitle>Latest</SliderTitle>
-            <Slider
-              data={latestMovies}
-              kind={"movie"}
-              category={category.movie_latest}
-            />
-          </SliderWrapper>
-          <SliderWrapper>
-            <SliderTitle>Top Rated</SliderTitle>
-            <Slider
-              data={topRatedMovies}
-              kind={"movie"}
-              category={category.movie_topRated}
-            />
-          </SliderWrapper>
-          <SliderWrapper>
-            <SliderTitle>Upcoming</SliderTitle>
-            <Slider
-              data={upcomingMovies}
-              kind={"movie"}
-              category={category.movie_upcoming}
-            />
-          </SliderWrapper>
-        </>
-      )}
-    </Wrapper>
+    <>
+      <Wrapper>
+        {nowPlayingLoading ? (
+          <Loader>Loading...</Loader>
+        ) : (
+          <>
+            <Banner
+              bgphoto={makeImagePath(nowPlayingMovies[0].backdrop_path || "")}
+            >
+              <Title>{nowPlayingMovies[0].title}</Title>
+              <Overview>{nowPlayingMovies[0].overview}</Overview>
+            </Banner>
+            <SliderWrapper>
+              <SliderTitle>Now Playing</SliderTitle>
+              <Slider
+                data={nowPlayingMovies}
+                kind={"movie"}
+                category={category.movie_nowPlaying}
+              />
+            </SliderWrapper>
+            {latestMovies && (
+              <SliderWrapper>
+                <SliderTitle>Latest</SliderTitle>
+                <Slider
+                  data={latestMovies}
+                  kind={"movie"}
+                  category={category.movie_latest}
+                />
+              </SliderWrapper>
+            )}
+            <SliderWrapper>
+              <SliderTitle>Top Rated</SliderTitle>
+              <Slider
+                data={topRatedMovies}
+                kind={"movie"}
+                category={category.movie_topRated}
+              />
+            </SliderWrapper>
+            <SliderWrapper>
+              <SliderTitle>Upcoming</SliderTitle>
+              <Slider
+                data={upcomingMovies}
+                kind={"movie"}
+                category={category.movie_upcoming}
+              />
+            </SliderWrapper>
+          </>
+        )}
+      </Wrapper>
+    </>
   );
 }
 

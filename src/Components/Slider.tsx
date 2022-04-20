@@ -104,9 +104,10 @@ interface ISlider {
   data?: IData[];
   kind: string;
   category: string;
+  search?: boolean;
 }
 
-function Slider({ data, kind, category }: ISlider) {
+function Slider({ data, kind, category, search }: ISlider) {
   const history = useHistory();
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
@@ -133,12 +134,19 @@ function Slider({ data, kind, category }: ISlider) {
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
   const onBoxClicked = (id: number, kind: string) => {
-    history.push(`/${kind}/${id}`);
+    if (search) history.push(`search/${kind}/${id}`);
+    else history.push(`/${kind}/${id}`);
   };
 
-  const itemMatch = useRouteMatch<{ movieId: string; tvId: string }>([
-    "/movie/:movieId",
-    "/tv/:tvId",
+  const itemMatch = useRouteMatch<{
+    kind: string;
+    movieId: string;
+    tvId: string;
+  }>([
+    "/search/:kind/:movieId",
+    "/search/:kind/:tvId",
+    "/:kind/:movieId",
+    "/:kind/:tvId",
   ]);
 
   return (
@@ -172,7 +180,7 @@ function Slider({ data, kind, category }: ISlider) {
                 initial="normal"
                 onClick={() => onBoxClicked(item.id, kind)}
                 transition={{ type: "tween" }}
-                bgphoto={makeImagePath(item.backdrop_path || "", "w300")}
+                bgphoto={makeImagePath(item.backdrop_path || "", "w400")}
               >
                 <Info variants={infoVariants}>
                   <h4>{item.title || item.original_name}</h4>
@@ -187,7 +195,7 @@ function Slider({ data, kind, category }: ISlider) {
       {itemMatch && (
         <Detail
           id={+itemMatch.params.movieId | +itemMatch.params.tvId}
-          kind={kind}
+          kind={itemMatch.params.kind}
           category={category}
         />
       )}

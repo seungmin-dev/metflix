@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
+import { useLocation, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import { getSearchedData, IData, IGetDataResult } from "../api";
 import Slider from "../Components/Slider";
@@ -19,12 +21,17 @@ const SliderTitle = styled.h2`
   color: ${(props) => props.theme.white.lighter};
   position: relative;
   padding: 20px;
+  margin-bottom: 60px;
 `;
 
 function Search() {
   const location = useLocation();
-  const keyword = new URLSearchParams(location.search).get("keyword");
-
+  const parameter = new URLSearchParams(location.search).get("keyword");
+  const [keyword, setKeyword] = useState("");
+  useEffect(() => {
+    if (parameter !== null) setKeyword(parameter);
+  }, []);
+  const [search, setSearch] = useState(true);
   const { data, isLoading } = useQuery<IGetDataResult>(
     ["search", keyword],
     () => getSearchedData(keyword)
@@ -42,16 +49,21 @@ function Search() {
   });
 
   return (
-    <Wrapper>
-      <SliderWrapper>
-        <SliderTitle>Movie Results</SliderTitle>
-        <Slider data={movieResults} kind={"movie"} category={""} />
-      </SliderWrapper>
-      <SliderWrapper>
-        <SliderTitle>Tv Show Results</SliderTitle>
-        <Slider data={tvResults} kind={"tv"} category={""} />
-      </SliderWrapper>
-    </Wrapper>
+    <>
+      <Helmet>
+        <title>Metflix - Search</title>
+      </Helmet>
+      <Wrapper>
+        <SliderWrapper>
+          <SliderTitle>Movie Results</SliderTitle>
+          <Slider data={movieResults} kind={"movie"} category={""} search />
+        </SliderWrapper>
+        <SliderWrapper>
+          <SliderTitle>Tv Show Results</SliderTitle>
+          <Slider data={tvResults} kind={"tv"} category={""} search />
+        </SliderWrapper>
+      </Wrapper>
+    </>
   );
 }
 

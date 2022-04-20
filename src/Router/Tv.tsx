@@ -10,6 +10,7 @@ import {
 } from "../api";
 import { category, makeImagePath } from "../utils";
 import Slider from "../Components/Slider";
+import { Helmet } from "react-helmet";
 
 const Wrapper = styled.div`
   background-color: black;
@@ -86,42 +87,47 @@ function Tv() {
     : [];
 
   return (
-    <Wrapper>
-      {latestLoading ? (
-        <Loader>Loading...</Loader>
-      ) : (
-        <>
-          <Banner bgphoto={makeImagePath(latestTv?.backdrop_path || "")}>
-            <Title>{latestTv?.original_name}</Title>
-            <Overview>{latestTv?.overview}</Overview>
-          </Banner>
-          <SliderWrapper>
-            <SliderTitle>Airing Today</SliderTitle>
-            <Slider
-              data={airingTodayTvs}
-              kind={"tv"}
-              category={category.tv_airingToday}
-            />
-          </SliderWrapper>
-          <SliderWrapper>
-            <SliderTitle>Popular</SliderTitle>
-            <Slider
-              data={popularTvs}
-              kind={"tv"}
-              category={category.tv_popular}
-            />
-          </SliderWrapper>
-          <SliderWrapper>
-            <SliderTitle>topRated</SliderTitle>
-            <Slider
-              data={topRatedTvs}
-              kind={"tv"}
-              category={category.tv_topRated}
-            />
-          </SliderWrapper>
-        </>
-      )}
-    </Wrapper>
+    <>
+      <Helmet>
+        <title>Metflix - Tv Shows</title>
+      </Helmet>
+      <Wrapper>
+        {latestLoading ? (
+          <Loader>Loading...</Loader>
+        ) : (
+          <>
+            <Banner bgphoto={makeImagePath(latestTv?.backdrop_path || "")}>
+              <Title>{latestTv?.original_name}</Title>
+              <Overview>{latestTv?.overview}</Overview>
+            </Banner>
+            <SliderWrapper>
+              <SliderTitle>Airing Today</SliderTitle>
+              <Slider
+                data={airingTodayTvs}
+                kind={"tv"}
+                category={category.tv_airingToday}
+              />
+            </SliderWrapper>
+            <SliderWrapper>
+              <SliderTitle>Popular</SliderTitle>
+              <Slider
+                data={popularTvs}
+                kind={"tv"}
+                category={category.tv_popular}
+              />
+            </SliderWrapper>
+            <SliderWrapper>
+              <SliderTitle>topRated</SliderTitle>
+              <Slider
+                data={topRatedTvs}
+                kind={"tv"}
+                category={category.tv_topRated}
+              />
+            </SliderWrapper>
+          </>
+        )}
+      </Wrapper>
+    </>
   );
 }
 
