@@ -78,6 +78,8 @@ function Home() {
     ? latestMovie.results
     : [];
 
+  console.log(latestMovie);
+
   const { data: topRatedMovie, isLoading: topRatedLoading } =
     useQuery<IGetDataResult>(["movies", "topRated"], getTopRatedMovies);
 

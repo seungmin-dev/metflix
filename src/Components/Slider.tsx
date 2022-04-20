@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
 import { useState } from "react";
 import { useQuery } from "react-query";
@@ -7,17 +8,26 @@ import { getNowPlayingMovies, IData } from "../api";
 import { makeImagePath } from "../utils";
 import Detail from "./Detail";
 
+import {
+  faPlay,
+  faThumbsDown,
+  faThumbsUp,
+  faPlus,
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+
 const Row = styled(motion.div)`
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr 1fr 50px;
   position: absolute;
   width: 100%;
+  height: 180px;
 `;
 
 const Box = styled(motion.div)<{ bgphoto: string }>`
   background-color: white;
-  height: 200px;
   background-image: url(${(props) => props.bgphoto});
   background-size: cover;
   background-position: center center;
@@ -28,6 +38,11 @@ const Box = styled(motion.div)<{ bgphoto: string }>`
   &:last-child {
     transform-origin: center right;
   }
+`;
+const Btn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Info = styled(motion.div)`
@@ -44,15 +59,15 @@ const Info = styled(motion.div)`
 `;
 
 const rowVariants = {
-  hidden: {
-    x: window.outerWidth + 10,
-  },
+  hidden: (increasing: boolean) => ({
+    x: increasing ? window.outerWidth + 10 : -window.outerWidth - 10,
+  }),
   visible: {
     x: 0,
   },
-  exit: {
-    x: -window.outerWidth - 10,
-  },
+  exit: (increasing: boolean) => ({
+    x: increasing ? -window.outerWidth - 10 : window.outerWidth + 10,
+  }),
 };
 
 const BoxVariants = {
@@ -94,13 +109,25 @@ function Slider({ data, kind, category }: ISlider) {
   const history = useHistory();
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
+  const [increasing, setIncreasing] = useState(true);
   const increaseIndex = () => {
     if (data) {
       if (leaving) return;
       toggleLeaving();
+      setIncreasing(true);
       const totalMovies = data.length;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
       setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+    }
+  };
+  const decreaseIndex = () => {
+    if (data) {
+      if (leaving) return;
+      toggleLeaving();
+      setIncreasing(false);
+      const totalMovies = data.length;
+      const maxIndex = Math.floor(totalMovies / offset) + 1;
+      setIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
     }
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
@@ -115,15 +142,23 @@ function Slider({ data, kind, category }: ISlider) {
 
   return (
     <>
-      <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+      <AnimatePresence
+        initial={false}
+        onExitComplete={toggleLeaving}
+        custom={increasing}
+      >
         <Row
           variants={rowVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
+          custom={increasing}
           transition={{ type: "tween", duration: 1 }}
           key={index}
         >
+          <Btn onClick={decreaseIndex}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </Btn>
           {data
             ?.slice(1)
             .slice(offset * index, offset * index + offset)
@@ -138,14 +173,14 @@ function Slider({ data, kind, category }: ISlider) {
                 transition={{ type: "tween" }}
                 bgphoto={makeImagePath(item.backdrop_path || "", "w300")}
               >
-                {item.id}
-                {kind}
-                {category}
                 <Info variants={infoVariants}>
                   <h4>{item.title || item.original_name}</h4>
                 </Info>
               </Box>
             ))}
+          <Btn onClick={increaseIndex}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </Btn>
         </Row>
       </AnimatePresence>
       {itemMatch && (
