@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/metflix/static/js/main.1d904510.js",
+    "main.js": "/metflix/static/js/main.0789f62a.js",
     "index.html": "/metflix/index.html",
-    "main.1d904510.js.map": "/metflix/static/js/main.1d904510.js.map"
+    "main.0789f62a.js.map": "/metflix/static/js/main.0789f62a.js.map"
   },
   "entrypoints": [
-    "static/js/main.1d904510.js"
+    "static/js/main.0789f62a.js"
   ]
 }
