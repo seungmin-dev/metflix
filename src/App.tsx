@@ -3,7 +3,6 @@ import Header from "./Components/Header";
 import Home from "./Router/Home";
 import Search from "./Router/Search";
 import Tv from "./Router/Tv";
-import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
   return (
@@ -24,7 +23,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <ReactQueryDevtools />
     </>
   );
 }

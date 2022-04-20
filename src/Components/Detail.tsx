@@ -81,7 +81,6 @@ function Detail({ id, kind, category }: IDetail) {
           }}
           layoutId={id + "_" + kind + "_" + category}
         >
-          {category}
           {data && (
             <>
               <BigCover
