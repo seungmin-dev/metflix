@@ -41,7 +41,7 @@ const Banner = styled.div<{ bgphoto: string }>`
 const Title = styled.h2`
   font-size: 62px;
   margin-bottom: 20px;
-  margin-top: 200px;
+  margin-top: 300px;
 `;
 
 const Overview = styled.p`
@@ -52,7 +52,6 @@ const Overview = styled.p`
 const SliderWrapper = styled.div`
   width: 100%;
   height: 300px;
-  margin-bottom: 20px;
 `;
 
 const SliderTitle = styled.h2`

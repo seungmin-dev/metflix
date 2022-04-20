@@ -77,11 +77,11 @@ const Input = styled(motion.input)`
   transform-origin: right center;
   position: absolute;
   right: 0;
-  padding: 5px 10px;
+  padding: 8px 10px;
   padding-left: 40px;
   z-index: -1;
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   background-color: transparent;
   border: 1px solid ${(props) => props.theme.white.lighter};
 `;
@@ -183,8 +183,7 @@ function Header() {
           />
           <motion.svg
             onClick={toggleSearch}
-            animate={{ x: searchOpen ? -215 : 0 }}
-            transition={{ type: "lenear" }}
+            animate={{ x: searchOpen ? -195 : 0 }}
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"

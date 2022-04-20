@@ -21,13 +21,12 @@ const SliderTitle = styled.h2`
   color: ${(props) => props.theme.white.lighter};
   position: relative;
   padding: 20px;
-  margin-bottom: 60px;
 `;
 
 function Search() {
   const location = useLocation();
   const parameter = new URLSearchParams(location.search).get("keyword");
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState(parameter);
   useEffect(() => {
     if (parameter !== null) setKeyword(parameter);
   }, []);

@@ -75,7 +75,6 @@ const rowVariants = {
 const BoxVariants = {
   normal: {
     scale: 1,
-    y: -50,
     transition: {
       type: "tween",
     },
@@ -133,20 +132,21 @@ function Slider({ data, kind, category, search }: ISlider) {
     }
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
-  const onBoxClicked = (id: number, kind: string) => {
+  const onBoxClicked = (id: number, kind: string, category: string) => {
     if (search) history.push(`search/${kind}/${id}`);
-    else history.push(`/${kind}/${id}`);
+    else history.push(`/${kind}/${category}/${id}`);
   };
 
   const itemMatch = useRouteMatch<{
     kind: string;
+    category: string;
     movieId: string;
     tvId: string;
   }>([
     "/search/:kind/:movieId",
     "/search/:kind/:tvId",
-    "/:kind/:movieId",
-    "/:kind/:tvId",
+    "/:kind/:category/:movieId",
+    "/:kind/:category/:tvId",
   ]);
 
   return (
@@ -178,7 +178,7 @@ function Slider({ data, kind, category, search }: ISlider) {
                 variants={BoxVariants}
                 whileHover="hover"
                 initial="normal"
-                onClick={() => onBoxClicked(item.id, kind)}
+                onClick={() => onBoxClicked(item.id, kind, category)}
                 transition={{ type: "tween" }}
                 bgphoto={makeImagePath(item.backdrop_path || "", "w400")}
               >
@@ -196,7 +196,7 @@ function Slider({ data, kind, category, search }: ISlider) {
         <Detail
           id={+itemMatch.params.movieId | +itemMatch.params.tvId}
           kind={itemMatch.params.kind}
-          category={category}
+          category={itemMatch.params.category}
         />
       )}
     </>

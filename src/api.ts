@@ -12,6 +12,7 @@ export interface IData {
   popularity: number;
   vote_average: number;
   media_type: string;
+  tagline: string;
 }
 export interface IGetDataResult {
   dates: {

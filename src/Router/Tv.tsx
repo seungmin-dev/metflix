@@ -96,9 +96,11 @@ function Tv() {
           <Loader>Loading...</Loader>
         ) : (
           <>
-            <Banner bgphoto={makeImagePath(latestTv?.backdrop_path || "")}>
-              <Title>{latestTv?.original_name}</Title>
-              <Overview>{latestTv?.overview}</Overview>
+            <Banner
+              bgphoto={makeImagePath(airingTodayTvs[0]?.backdrop_path || "")}
+            >
+              <Title>{airingTodayTvs[0]?.original_name}</Title>
+              <Overview>{airingTodayTvs[0]?.overview}</Overview>
             </Banner>
             <SliderWrapper>
               <SliderTitle>Airing Today</SliderTitle>

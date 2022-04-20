@@ -15,10 +15,10 @@ function App() {
           >
             <Search />
           </Route>
-          <Route path={["/tv", "/tv/:tvId"]}>
+          <Route path={["/tv", "/tv/:category/:tvId"]}>
             <Tv />
           </Route>
-          <Route path={["/", "/movie/:movieId"]}>
+          <Route path={["/", "/movie/:category/:movieId"]}>
             <Home />
           </Route>
         </Switch>
