@@ -66,7 +66,6 @@ function Detail({ id, kind, category }: IDetail) {
   const { data, isLoading } = useQuery<IData>(["detail", id, kind], () =>
     getDetailData(id, kind)
   );
-  console.log("detail: ", data);
 
   return (
     <AnimatePresence>

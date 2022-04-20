@@ -27,6 +27,7 @@ const Row = styled(motion.div)`
 `;
 
 const Box = styled(motion.div)<{ bgphoto: string }>`
+  border-radius: 5px;
   background-color: white;
   background-image: url(${(props) => props.bgphoto});
   background-size: cover;
@@ -46,15 +47,16 @@ const Btn = styled.div`
 `;
 
 const Info = styled(motion.div)`
-  padding: 10px;
-  background-color: ${(props) => props.theme.black.lighter};
+  border-radius: 0 0 5px 5px;
+  padding: 20px 10px;
+  background: linear-gradient(rgba(0, 0, 0, 0), 40%, rgba(0, 0, 0, 0.7));
   opacity: 0;
   position: absolute;
   width: 100%;
   bottom: 0;
   h4 {
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
   }
 `;
 
@@ -80,9 +82,10 @@ const BoxVariants = {
   },
   hover: {
     xIndex: 99,
-    scale: 1.3,
+    scale: 1.1,
+    border: "1px solid #fff",
+    boxShadow: "2px 2px 2px rgba(0,0,0,0.4)",
     transition: {
-      delay: 0.5,
       type: "tween",
     },
   },
@@ -91,9 +94,7 @@ const BoxVariants = {
 const infoVariants = {
   hover: {
     opacity: 1,
-    transition: {
-      delay: 0.6,
-    },
+    transition: {},
   },
 };
 

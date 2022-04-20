@@ -11,6 +11,7 @@ export interface IData {
   first_air_date: string;
   popularity: number;
   vote_average: number;
+  media_type: string;
 }
 export interface IGetDataResult {
   dates: {
@@ -72,8 +73,13 @@ export function getTopRatedTv() {
 }
 
 export function getDetailData(id: number, kind: string) {
-  console.log("api kind : ", kind);
   return fetch(`${BASE_PATH}/${kind}/${id}?api_key=${API_KEY}`).then(
     (response) => response.json()
   );
+}
+
+export function getSearchedData(keyword: any) {
+  return fetch(
+    `${BASE_PATH}/search/multi?api_key=${API_KEY}&query=${keyword}`
+  ).then((response) => response.json());
 }
