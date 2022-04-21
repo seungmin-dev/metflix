@@ -196,7 +196,7 @@ function Slider({ data, kind, category, search }: ISlider) {
         <Detail
           id={+itemMatch.params.movieId | +itemMatch.params.tvId}
           kind={itemMatch.params.kind}
-          category={itemMatch.params.category}
+          category={itemMatch.params.category || ""}
         />
       )}
     </>
