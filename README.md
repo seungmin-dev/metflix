@@ -1,11 +1,15 @@
 # metflix
-<a href="https://seungmin-dev.github.io" target="_blank">🖥 클릭해서 홈페이지로 이동</a>
+<p align="center"><a href="https://seungmin-dev.github.io" target="_blank">🖥 홈페이지로 이동</a></p>
 
 <p align="center"><img width="700" style="display: block; margin: 0 auto" alt="스크린샷 2022-04-25 오후 10 11 11" src="https://user-images.githubusercontent.com/67530394/165096431-461cb7cc-6837-455c-947f-00d9c03b0a7c.png">
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/67530394/165103720-84ae1fe1-3268-4291-917e-d8e110b96c81.png"></p>
 
 <hr />
   
+## Project   
+> 영화, 드라마 정보를 보여주는 사이트(넷플릭스 클론)   
+> 노마드코더 reactJS 멤버십 코스 졸업 작품   
+
 ## Pages   
 * 홈 화면(영화)
 * TV shows 화면
