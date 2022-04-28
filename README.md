@@ -1,5 +1,5 @@
 # metflix
-<p align="center"><a href="https://seungmin-dev.github.io" target="_blank">🖥 홈페이지로 이동</a></p>
+<p align="center"><a href="https://seungmin-dev.github.io/metflix" target="_blank">🖥 홈페이지로 이동</a></p>
 
 <p align="center"><img width="700" style="display: block; margin: 0 auto" alt="스크린샷 2022-04-25 오후 10 11 11" src="https://user-images.githubusercontent.com/67530394/165096431-461cb7cc-6837-455c-947f-00d9c03b0a7c.png">
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/67530394/165103720-84ae1fe1-3268-4291-917e-d8e110b96c81.png"></p>
